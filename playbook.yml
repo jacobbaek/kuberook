@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: no
+  
+  tasks:
+    - name: Update latest packages
+      yum:
+        name: "*"
+        state: latest
+   
+    - name: Disabled selinux
+      selinux:
+        state: disabled
