@@ -11,3 +11,12 @@
     - name: Disabled selinux
       selinux:
         state: disabled
+
+    - name: Generated hosts file
+      blockinfile:
+        block:
+          node1 11.11.11.10
+          node2 11.11.11.11
+          node3 11.11.11.12
+          node4 11.11.11.13
+        path: /etc/hosts
