@@ -7,7 +7,22 @@
       yum:
         name: "*"
         state: latest
+
+    - name: install packages
+      package:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - vim
+        - net-tools
    
+#    - name: insert config for deploy ntp server 
+#      lineinfile:
+#        path: /etc/chrony.conf 
+#        line: "server 11.11.11.5 iburst"
+#        regexp: ""
+#        insertafter: "^server 3."
+
     - name: Disabled selinux
       selinux:
         state: disabled
@@ -20,3 +35,10 @@
           node3 11.11.11.12
           node4 11.11.11.13
         path: /etc/hosts
+
+    - name: install packages
+      yum:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - lvm2

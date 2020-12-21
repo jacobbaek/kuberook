@@ -24,6 +24,7 @@ spec:
     enabled: false
     rulesNamespace: rook-ceph
   network:
+   # provider: host
   crashCollector:
     disable: false
   cleanupPolicy:
@@ -38,24 +39,24 @@ spec:
   resources:
   removeOSDsIfOutAndSafeToRemove: false
   storage: # cluster level storage configuration and selection
-    useAllNodes: true
-    useAllDevices: true
-    #nodes:
-    #  - name: "node1"
-    #    devices:
-    #      - name: "sdb"
-    #      - name: "sdc"
-    #      - name: "sdd"
-    #  - name: "node2"
-    #    devices:
-    #      - name: "sdb"
-    #      - name: "sdc"
-    #      - name: "sdd"
-    #  - name: "node3"
-    #    devices:
-    #      - name: "sdb"
-    #      - name: "sdc"
-    #      - name: "sdd"
+    useAllNodes: false
+    useAllDevices: false
+    nodes:
+      - name: "node1"
+        devices:
+          - name: "sdb"
+          - name: "sdc"
+          - name: "sdd"
+      - name: "node2"
+        devices:
+          - name: "sdb"
+          - name: "sdc"
+          - name: "sdd"
+      - name: "node3"
+        devices:
+          - name: "sdb"
+          - name: "sdc"
+          - name: "sdd"
   disruptionManagement:
     managePodBudgets: false
     osdMaintenanceTimeout: 30
