@@ -1,0 +1,40 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStore
+metadata:
+  name: ceph-store
+  namespace: rook-ceph # namespace:cluster
+spec:
+  metadataPool:
+    failureDomain: host
+    replicated:
+      size: 3
+      requireSafeReplicaSize: true
+    parameters:
+      compression_mode: none
+  dataPool:
+    failureDomain: host
+    replicated:
+      size: 3
+      requireSafeReplicaSize: true
+    parameters:
+      compression_mode: none
+  preservePoolsOnDelete: false
+  gateway:
+    type: s3
+    sslCertificateRef:
+    port: 80
+    # The port that RGW pods will listen on (https). An ssl certificate is required.
+    # securePort: 443
+    # The number of pods in the rgw deployment
+    instances: 1
+    placement:
+    annotations:
+    labels:
+    resources:
+  healthCheck:
+    bucket:
+      disabled: false
+      interval: 60s
+    # Configure the pod liveness probe for the rgw daemon
+    livenessProbe:
+      disabled: false
