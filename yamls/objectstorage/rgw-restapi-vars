@@ -1,0 +1,6 @@
+export CLUSTER_NAME=$(kubectl config view -o jsonpath='{.clusters[*].name}')
+export APISERVER=$(kubectl config view -o jsonpath="{.clusters[?(@.name==\"$CLUSTER_NAME\")].cluster.server}")
+export TOKEN=$(kubectl get secret $(kubectl get secret -n rook-ceph | grep ceph-root | cut -f1 -d ' ') -n rook-ceph -o jsonpath='{.data.token}' | base64 -d)
+echo $CLUSTER_NAME
+echo $APISERVER
+echo $TOKEN
